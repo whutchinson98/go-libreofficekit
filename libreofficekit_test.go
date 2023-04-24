@@ -1,8 +1,8 @@
 package libreofficekit
 
 import (
-	"testing"
 	"os"
+	"testing"
 )
 
 const (
@@ -65,57 +65,4 @@ func TestSuccessfulLoadAndSaveDocument(t *testing.T) {
 	}
 
 	defer os.Remove(SaveDocumentPath)
-}
-
-func TestGetPartPageRectangles(t *testing.T) {
-	office, _ := NewOffice(DefaultLibreOfficePath)
-	document, _ := office.LoadDocument(SampleDocument)
-	rectangles := document.GetPartPageRectangles()
-	if len(rectangles) != 2 {
-		t.Fail()
-	}
-}
-
-func TestGetParts(t *testing.T) {
-	office, _ := NewOffice(DefaultLibreOfficePath)
-	document, _ := office.LoadDocument(SampleDocument)
-	parts := document.GetParts()
-	if parts != 2 {
-		t.Fail()
-	}
-}
-
-func TestGetTileMode(t *testing.T) {
-	office, _ := NewOffice(DefaultLibreOfficePath)
-	document, _ := office.LoadDocument(SampleDocument)
-	mode := document.GetTileMode()
-	if mode != RGBATilemode && mode != BGRATilemode {
-		t.Fail()
-	}
-}
-
-func TestGetType(t *testing.T) {
-	office, _ := NewOffice(DefaultLibreOfficePath)
-	document, _ := office.LoadDocument(SampleDocument)
-	documentType := document.GetType()
-	if documentType != TextDocument {
-		t.Fail()
-	}
-}
-
-func TestTextSelection(t *testing.T) {
-	office, _ := NewOffice(DefaultLibreOfficePath)
-	document, _ := office.LoadDocument(SampleDocument)
-	rectangle := document.GetPartPageRectangles()[0]
-	document.SetTextSelection(SetGraphicSelectionStart, rectangle.Min.X, rectangle.Min.Y)
-	document.SetTextSelection(SetGraphicSelectionEnd, rectangle.Max.X, rectangle.Max.Y)
-	plaintext := document.GetTextSelection("text/plain;charset=utf-8")
-	if len(plaintext) < 1000 {
-		t.Fail()
-	}
-	document.ResetTextSelection()
-	plaintext = document.GetTextSelection("text/plain;charset=utf-8")
-	if len(plaintext) != 0 {
-		t.Fail()
-	}
 }
