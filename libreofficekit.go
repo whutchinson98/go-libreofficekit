@@ -86,3 +86,13 @@ func (document *Document) SaveAs(path string, format string, filter string) erro
 	}
 	return nil
 }
+
+// PostUnoCommand
+// Actual (from libreoffice) error message can be read with Office.GetError
+func (document *Document) PostUnoCommand(command string, filter string) {
+	cCommand := C.CString(command)
+	defer C.free(unsafe.Pointer(cCommand))
+	cFilter := C.CString(filter)
+	defer C.free(unsafe.Pointer(cFilter))
+	C.post_uno_command(document.handle, cCommand, cFilter, false)
+}

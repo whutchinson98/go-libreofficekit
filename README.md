@@ -11,6 +11,12 @@ $ sudo apt-get install libreoffice libreofficekit-dev
 $ go get github.com/docsbox/go-libreofficekit
 ```
 
+# Update Bindings
+
+```
+go build libreofficekit.go
+```
+
 # Usage
 
 This example demonstrates how to convert Microsoft Office document to PDF

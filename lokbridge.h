@@ -26,3 +26,7 @@ void destroy_document(LibreOfficeKitDocument* pThis) {
 int document_save(LibreOfficeKitDocument* pThis, const char* pUrl, const char* pFormat, const char* pFilterOptions) {
     return pThis->pClass->saveAs(pThis, pUrl, pFormat, pFilterOptions);
 };
+
+void post_uno_command(LibreOfficeKitDocument* pThis, const char* pCommand, const char* pArguments, bool bNotifyWhenFinished) {
+    return pThis->pClass->postUnoCommand(pThis, pCommand, pArguments, bNotifyWhenFinished);
+}
