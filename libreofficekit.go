@@ -96,3 +96,11 @@ func (document *Document) PostUnoCommand(command string, filter string) {
 	defer C.free(unsafe.Pointer(cFilter))
 	C.post_uno_command(document.handle, cCommand, cFilter, false)
 }
+
+// GetCommandValues
+// Actual (from libreoffice) error message can be read with Office.GetError
+func (document *Document) GetCommandValues(command string) string {
+	cCommand := C.CString(command)
+	defer C.free(unsafe.Pointer(cCommand))
+	return C.GoString(C.get_command_values(document.handle, cCommand))
+}

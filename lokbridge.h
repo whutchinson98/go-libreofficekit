@@ -30,3 +30,7 @@ int document_save(LibreOfficeKitDocument* pThis, const char* pUrl, const char* p
 void post_uno_command(LibreOfficeKitDocument* pThis, const char* pCommand, const char* pArguments, bool bNotifyWhenFinished) {
     return pThis->pClass->postUnoCommand(pThis, pCommand, pArguments, bNotifyWhenFinished);
 }
+
+char* get_command_values(LibreOfficeKitDocument* pThis, const char* pCommand) {
+    return pThis->pClass->getCommandValues(pThis, pCommand);
+}
